@@ -2,23 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { FlatList, Text, TouchableOpacity, View, StyleSheet , Image, Button} from 'react-native';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../../Database/firebase';
-
+import Toast from 'react-native-toast-message';
 function BooksList({ navigation }) {
-  const [books, setBooks] = useState([]); // State to store list of books
+  const [books, setBooks] = useState([]);
 
-  // Fetch books from Firestore
+  
   useEffect(() => {
     const fetchBooks = async () => {
       const snapshot = await getDocs(collection(db, "books"));
       const booksList = snapshot.docs.map(doc => ({...doc.data(),id: doc.id})); // Add the document ID as a key
       setBooks(booksList);
-      console.log("In book List",books); // Update the books state
+      console.log("In book List",books); 
     };
 
-    fetchBooks(); // Call fetchBooks function
+    fetchBooks(); 
   }, []);
 
-  // Render each book item
+
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={styles.item}
@@ -38,10 +38,11 @@ function BooksList({ navigation }) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={books} // Use the books array for data
-        keyExtractor={(item) => item.id} // Use book ID as the unique key
-        renderItem={renderItem} // Render each book item
+        data={books} 
+        keyExtractor={(item) => item.id} 
+        renderItem={renderItem}
       />
+      <Toast/>
     </View>
   );
 }

@@ -24,9 +24,11 @@ function HomeStack(){
 }
 
 function BorrowStack(){
+  return(
   <Stack.Navigator>
     <Stack.Screen name='Borrow' component={BorrowedBooks}/>
   </Stack.Navigator>
+  );
 }
 
 export default function App() {
@@ -37,8 +39,8 @@ export default function App() {
       <Tab.Screen name='books' component={HomeStack} options={{title: "Home", headerShown: false, tabBarIcon: ({color}) => 
         (<Ionicons name="home" size={20} color={color} style={{paddingTop: 10}} />)
         }}/>
-        <Tab.Screen name='borrowed' component={BorrowStack} options={{title: "Borrowed Books", headerShown: true, tabBarIcon: ({color}) => 
-        (<Ionicons name="home" size={20} color={color} style={{paddingTop: 10}} />)}} />
+        <Tab.Screen name='borrowed' component={BorrowStack} options={{title: "Borrowed Books", headerShown: false, tabBarIcon: ({color}) => 
+        (<Ionicons name="book" size={20} color={color} style={{paddingTop: 10}} />)}} />
       </Tab.Navigator>
     </NavigationContainer>
   );
